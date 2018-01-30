@@ -18,6 +18,7 @@ export const en = {
   LongAllowed: 'LongAllowed',
   LookingForOpportunity: 'Looking for opportunity...',
   MaxRetryCountReachedCancellingThePendingOrders: 'Max retry count reached. Cancelling the pending orders.',
+  OrderFailed: 'Order is failed. Cancelling the pending orders.',
   NetExposureIsLargerThanMaxNetExposure: 'Net exposure is larger than max net exposure.',
   NoArbitrageOpportunitySpreadIsNotInverted: 'No arbitrage opportunity. Spread is not inverted.',
   NoBestAskWasFound: 'No best ask was found.',
@@ -74,6 +75,8 @@ export const ja = {
   LookingForOpportunity: '裁定機会をチェック中...',
   MaxRetryCountReachedCancellingThePendingOrders:
     '最大試行回数(maxRetryCount設定)に達しました。オーダーをキャンセルします。',
+  OrderFailed:
+    'オーダーが失敗しました。オーダーをキャンセルします。',
   NetExposureIsLargerThanMaxNetExposure: 'ネットエクスポージャーが最大ネットエクスポージャー設定を超えています。',
   NoArbitrageOpportunitySpreadIsNotInverted: '裁定機会なし。スプレッド > 0。',
   NoBestAskWasFound: 'ベストアスクが見つかりませんでした。',

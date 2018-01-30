@@ -20,10 +20,12 @@ import { findBrokerConfig } from './configUtil';
 import BrokerAdapterRouter from './BrokerAdapterRouter';
 import { EventEmitter } from 'events';
 import { calcProfit } from './pnl';
+import { orderFailes } from './constants';
 
 @injectable()
 export default class PairTrader extends EventEmitter {
   private readonly log = getLogger(this.constructor.name);
+  private orderFailedFlag: boolean = false;
 
   constructor(
     @inject(symbols.ConfigStore) private readonly configStore: ConfigStore,
@@ -77,9 +79,17 @@ export default class PairTrader extends EventEmitter {
         break;
       }
 
-      if (i === config.maxRetryCount) {
+      if (_.some(orderFailes, keyword => _.includes(ex.message, keyword))) {
+        this.orderFailedFlag = true;
+      }
+
+      if (i === config.maxRetryCount || this.orderFailedFlag ) {
         this.status = 'MaxRetryCount breached';
-        this.log.warn(t`MaxRetryCountReachedCancellingThePendingOrders`);
+        if ( this.orderFailedFlag ) {
+          this.log.warn(t`OrderFailed`);
+        } else {
+          this.log.warn(t`MaxRetryCountReachedCancellingThePendingOrders`);
+        }
         const cancelTasks = orders.filter(o => !o.filled).map(o => this.brokerAdapterRouter.cancel(o));
         await Promise.all(cancelTasks);
         if (

@@ -9,6 +9,9 @@ export const fatalErrors = [
   'Conditions and Trading Rules before continuing',
   'product_disabled'
 ];
+export const orderFailes = [
+  'Order is not accepted. Please try again later.'
+];
 export const configStoreSocketUrl = 'tcp://127.0.0.1:8709';
 export const reportServicePubUrl = 'tcp://127.0.0.1:8710';
 export const reportServiceRepUrl = 'tcp://127.0.0.1:8711';
